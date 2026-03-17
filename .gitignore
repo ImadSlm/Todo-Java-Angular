@@ -1,0 +1,28 @@
+# Backend (Java/Maven)
+backend/target/
+backend/.classpath
+backend/.project
+backend/.settings/
+backend/*.class
+backend/*.jar
+backend/*.log
+
+# Frontend (Angular)
+frontend/dist/
+frontend/node_modules/
+frontend/.angular/
+frontend/coverage/
+node_modules/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Environment
+.env
+.env.local
+*.pem
