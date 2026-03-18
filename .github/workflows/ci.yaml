@@ -19,11 +19,11 @@ jobs:
           distribution: "temurin"
           java-version: "21"
       - name: Compilation
-        run: ./mvnw compile
+        run: mvn compile
       - name: Tests unitaires
-        run: ./mvnw test
+        run: mvn test
       - name: Build and test backend
-        run: ./mvnw clean install
+        run: mvn clean install
 
   frontend:
     name: Angular
