@@ -27,6 +27,7 @@ jobs:
 
   frontend:
     name: Angular
+    needs: backend
     runs-on: ubuntu-latest
     defaults:
       run:
