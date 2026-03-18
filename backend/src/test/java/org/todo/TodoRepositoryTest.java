@@ -25,7 +25,8 @@ public class TodoRepositoryTest {
     assertEquals("Test todo", todo.getTitle());
     assertEquals(true, todo.isCompleted());
 
+    int initialSize = repository.findAll().size();
     repository.delete(todo);
-    assertEquals(0, repository.findAll().size());
+    assertEquals(initialSize - 1, repository.findAll().size());
   }
 }
