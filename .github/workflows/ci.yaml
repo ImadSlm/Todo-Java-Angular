@@ -18,8 +18,6 @@ jobs:
         with:
           distribution: "temurin"
           java-version: "21"
-      - name: Compilation
-        run: mvn compile
       - name: Test and build backend
         run: mvn clean install
 
