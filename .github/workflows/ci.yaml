@@ -12,13 +12,12 @@ jobs:
       run:
         working-directory: ./backend
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - name: Set up JDK 21
-        uses: actions/setup-java@v2
+        uses: actions/setup-java@v4
         with:
           distribution: "temurin"
           java-version: "21"
-          cache: "maven"
       - name: Compilation
         run: ./mvnw compile
       - name: Tests unitaires
@@ -33,13 +32,13 @@ jobs:
       run:
         working-directory: ./frontend
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - name: Set up Node.js 20
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v4
         with:
           node-version: "20"
           cache: "npm"
       - name: Install dependencies
-        run: npm install
+        run: npm ci
       - name: Build and test frontend
         run: npm run build
