@@ -20,14 +20,11 @@ jobs:
           java-version: "21"
       - name: Compilation
         run: mvn compile
-      - name: Run tests
-        run: mvn test
-      - name: Build backend
-        run: mvn clean install -DskipTests
+      - name: Test and build backend
+        run: mvn clean install
 
   frontend:
     name: Angular
-    needs: backend
     runs-on: ubuntu-latest
     defaults:
       run:
