@@ -20,8 +20,10 @@ jobs:
           java-version: "21"
       - name: Compilation
         run: mvn compile
-      - name: Build and test backend
-        run: mvn clean install
+      - name: Run tests
+        run: mvn test
+      - name: Build backend
+        run: mvn clean install -DskipTests
 
   frontend:
     name: Angular
@@ -39,5 +41,5 @@ jobs:
           cache-dependency-path: "./frontend/package-lock.json"
       - name: Install dependencies
         run: npm ci
-      - name: Build and test frontend
+      - name: Build frontend
         run: npm run build

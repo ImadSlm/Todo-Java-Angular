@@ -36,15 +36,19 @@ public class TodoControllerTest {
 
   @Test
   public void getById() throws Exception {
-    mvc.perform(org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post("/todos")
-        .contentType(org.springframework.http.MediaType.APPLICATION_JSON)
-        .content(json))
+    MvcResult createResult = mvc
+        .perform(org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post("/todos")
+            .contentType(org.springframework.http.MediaType.APPLICATION_JSON)
+            .content(json))
+        .andExpect(org.springframework.test.web.servlet.result.MockMvcResultMatchers.status().isCreated())
         .andReturn();
-    mvc.perform(org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get("/todos/{id}", 1L))
-        .andExpect(org.springframework.test.web.servlet.result.MockMvcResultMatchers.status().isOk())
-        .andExpect(jsonPath("$.id").value(1L));
-  }
 
+    Long todoId = objectMapper.readTree(createResult.getResponse().getContentAsString()).get("id").asLong();
+
+    mvc.perform(org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get("/todos/{id}", todoId))
+        .andExpect(org.springframework.test.web.servlet.result.MockMvcResultMatchers.status().isOk())
+        .andExpect(jsonPath("$.id").value(todoId));
+  }
 
   @Test
   public void testGetAll() throws Exception {
@@ -55,9 +59,10 @@ public class TodoControllerTest {
   @Test
   public void testUpdate() throws Exception {
     String updateJson = "{\"title\": \"Updated Todo\", \"completed\": true}";
-    MvcResult createResult = mvc.perform(org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post("/todos")
-        .contentType(org.springframework.http.MediaType.APPLICATION_JSON)
-        .content(json))
+    MvcResult createResult = mvc
+        .perform(org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post("/todos")
+            .contentType(org.springframework.http.MediaType.APPLICATION_JSON)
+            .content(json))
         .andExpect(org.springframework.test.web.servlet.result.MockMvcResultMatchers.status().isCreated())
         .andReturn();
 
@@ -73,9 +78,10 @@ public class TodoControllerTest {
 
   @Test
   public void testDelete() throws Exception {
-    MvcResult createResult = mvc.perform(org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post("/todos")
-        .contentType(org.springframework.http.MediaType.APPLICATION_JSON)
-        .content(json))
+    MvcResult createResult = mvc
+        .perform(org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post("/todos")
+            .contentType(org.springframework.http.MediaType.APPLICATION_JSON)
+            .content(json))
         .andExpect(org.springframework.test.web.servlet.result.MockMvcResultMatchers.status().isCreated())
         .andReturn();
 
